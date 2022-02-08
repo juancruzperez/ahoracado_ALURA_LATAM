@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>El Ahorcado</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    
+    <div style="text-align:center; margin: 50px 0px;">
+      <h1 class="titulo">El Ahorcado</h1>
+      <button class="btn" id="iniciar-juego">INICIAR JUEGO</button>
+    </div>
+    <div style="text-align:center">
+      <input onkeypress="return /[A-Z]/i.test(event.key)" maxlength="16" class="text-input" type="text" id="input-nueva-palabra" placeholder="Escriba una nueva palabra">
+      <button class="btn" id="nueva-palabra">AGREGAR PALABRA</button> 
+    </div>
+    <div style="text-align:center;">
+      <canvas id="ahorcado" height="800px" width="1200px"></canvas>
+    </div>
+    <div style="text-align:center">
+      <button class="btn" id="reiniciar-juego" >OTRA VEZ</button>
+    </div>
+    <footer class="footer">
+      <p>© 2022 Juan Cruz Perez | 
+      <a href="mailto:juanceprez@gmail.com"><img border="0" alt="juanceprez@gmail.com" src="img/gmail.png" width="20" height="20"> </a>
+      <a href="https://github.com/juancruzperez"><img border="0" alt="GitHub" src="img/git.png" width="20" height="20"></a>
+      <a href="https://www.linkedin.com/in/juancruzperez/"><img border="0" alt="GitHub" src="img/linkedin.png" width="20" height="20"></a>
+      </p>
+  </footer>
+    <script type="text/javascript" src="canvas.js"></script>
+    <script type="text/javascript" src="ahorcado.js"></script>
+  </body>
+</html>
