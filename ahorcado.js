@@ -13,7 +13,8 @@ arrayLetraIngresada = [];
 arrayLetrasCorrectas = [];
 arrayLetrasIncorrectas = [];
 let letrasUnicas = [];
-
+verificarFinGanador();
+verificarFinPerdedor();
 function sortearPalabra(){
     var numeroAleatorio = Math.floor(Math.random()*palabrasSecretas.length);
     palabraSorteada = palabrasSecretas[numeroAleatorio];
@@ -90,8 +91,6 @@ function dibujarletras(arrOrden){
 }
 
 document.addEventListener("keyup", function(event){
-    verificarFinGanador();
-    verificarFinPerdedor();
     arrayLetraIngresada = [];
     var letra = event.key.toUpperCase();
     var codigo = letra.charCodeAt();
