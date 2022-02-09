@@ -9,16 +9,23 @@ var juegoIniciado = false;
 var palabraSorteada;
 var indices = [];
 var arrayPalabra;
-arrayLetraIngresada = [];
-arrayLetrasCorrectas = [];
-arrayLetrasIncorrectas = [];
-let letrasUnicas = [];
-verificarFinGanador();
-verificarFinPerdedor();
+arrayLetraIngresada = []
+arrayLetrasCorrectas = []
+arrayLetrasIncorrectas = []
+let letrasUnicas = []
+
+function cribarLetrasRepetidas(){
+    for (i=0;i<palabraSorteada.length;i++){
+        if(!letrasUnicas.includes(palabraSorteada[i])){
+            letrasUnicas.push(palabraSorteada[i])
+        }
+    }
+}
+
 function sortearPalabra(){
     var numeroAleatorio = Math.floor(Math.random()*palabrasSecretas.length);
     palabraSorteada = palabrasSecretas[numeroAleatorio];
-    palabrasSecretas.splice(numeroAleatorio,1);
+    palabrasSecretas.splice(numeroAleatorio,1)
     return palabraSorteada;
 }
 
@@ -31,6 +38,7 @@ btnIniciar.addEventListener("click",function(event){
     event.preventDefault();
     pincel.clearRect(0, 0, pantalla.width, pantalla.height);
     iniciarJuego();
+    pantalla.focus()
 })
 btnReiniciar.addEventListener("click",function(event){
     event.preventDefault();
@@ -51,10 +59,12 @@ function iniciarJuego(){
     sortearPalabra();
     crearArrayPalabra(palabraSorteada);
     dibujarGuiones();
+    cribarLetrasRepetidas()
     juegoIniciado = true;
-    arrayLetraIngresada = [];
-    arrayLetrasCorrectas = [];
-    arrayLetrasIncorrectas = [];
+    console.log(arrayPalabra)
+    arrayLetraIngresada = []
+    arrayLetrasCorrectas = []
+    arrayLetrasIncorrectas = []
 }
 
 function buscarIndices(){
@@ -68,20 +78,20 @@ function buscarIndices(){
 }
 
 function dibujarGuiones(){
-    var inicioX = 350;
-    var inicioY = 610;
-    var contador = 0;
-    var nLetras = palabraSorteada.length;
+    var inicioX = 350
+    var inicioY = 610
+    var contador = 0
+    var nLetras = palabraSorteada.length
     while (contador<nLetras){
-        pincel.fillStyle = "red";
+        pincel.fillStyle = "red"
         pincel.fillRect(inicioX+(40*contador),inicioY,30,4);
-        contador++;
+        contador++
     }
 }
 
 function dibujarletras(arrOrden){
-    var inicioX = 358;
-    var inicioY = 600;
+    var inicioX = 358
+    var inicioY = 600
         for(i=0;i<arrOrden.length;i++){
             pincel.fillStyle = "blue";
             pincel.font = "20px Georgia";
@@ -110,35 +120,31 @@ document.addEventListener("keyup", function(event){
         if(comparador<arrayLetrasIncorrectas.length){
             dibujarLetrasErroneas(arrayLetrasIncorrectas) 
         }
-        dibujarAhorcado();
+        dibujarAhorcado()
         }
-    
+    verificarFinGanador()
+    verificarFinPerdedor()
     } 
 });
 
 function dibujarLetrasErroneas(letrasIncorrectas){
-    var inicioX = 400;
-    var inicioY = 200;
+    var inicioX = 400
+    var inicioY = 200
     pincel.fillStyle = "black";
     pincel.font = "20px Georgia";
     pincel.fillText("letras erroneas " + letrasIncorrectas.toString(),inicioX,inicioY);
 }
 
 function verificarFinGanador(){
-    let letras = arrayPalabra;
-    letras.forEach((l) => {
-        if (!letrasUnicas.includes(l)){
-            letrasUnicas.push(l)
-        }
-    })
     let palabraOriginalsinLetrasRepetidas = letrasUnicas.sort().toString();
     let letrasErroneasIngresadas = arrayLetrasCorrectas.sort().toString();
     if(palabraOriginalsinLetrasRepetidas===letrasErroneasIngresadas){
         pincel.fillStyle = "lightgreen";
         pincel.font = "50px Georgia";
         pincel.fillText("Ganaste, felicidades!",600,400);
-        juegoIniciado = false;
-        btnReiniciar.focus();
+        juegoIniciado = false
+        btnReiniciar.focus()
+        letrasUnicas = []
     }
 }
 
@@ -147,14 +153,15 @@ function verificarFinPerdedor(){
         pincel.fillStyle = "red";
         pincel.font = "50px Georgia";
         pincel.fillText("Fin del juego!",600,400);
-        juegoIniciado = false;
-        alert("la palabra era " + palabraSorteada);
-        btnReiniciar.focus();
+        juegoIniciado = false
+        alert("la palabra era " + palabraSorteada)
+        btnReiniciar.focus()
+        letrasUnicas = []
     }
 }
 
 function dibujarAhorcado(){
-    let contador = arrayLetrasIncorrectas.length;
+    let contador = arrayLetrasIncorrectas.length
     if (contador===1){
         cabeza()
     }else if(contador===2){
